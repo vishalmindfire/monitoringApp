@@ -1,0 +1,50 @@
+{
+  "name": "monitoringapp",
+  "version": "1.0.0",
+  "description": "Monitoring app for microservices in kubernetes",
+  "keywords": [
+    "node",
+    "redis",
+    "kubernetes",
+    "microservices",
+    "prometheus"
+  ],
+  "homepage": "https://github.com/vishalmindfire/monitoringApp#readme",
+  "bugs": {
+    "url": "https://github.com/vishalmindfire/monitoringApp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishalmindfire/monitoringApp.git"
+  },
+  "license": "GPL-3.0",
+  "author": "Vishal Minz",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest "
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
+    "@commitlint/types": "^21.0.1",
+    "@eslint/js": "^10.0.1",
+    "@jest/globals": "^30.4.1",
+    "@tsconfig/node24": "^24.0.4",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.9.1",
+    "eslint": "^10.4.1",
+    "eslint-plugin-jest": "^29.15.2",
+    "eslint-plugin-perfectionist": "^5.9.0",
+    "husky": "^9.1.7",
+    "jest": "^30.4.2",
+    "prettier": "^3.8.3",
+    "ts-jest": "^29.4.11",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.1"
+  }
+}
