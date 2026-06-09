@@ -39,10 +39,12 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "bullmq": "^5.78.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "helmet": "^8.2.0",
+    "ioredis": "^5.10.1",
     "morgan": "^1.11.0"
   },
   "devDependencies": {
@@ -55,6 +57,7 @@
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/ioredis": "^4.28.10",
     "@types/jest": "^30.0.0",
     "@types/morgan": "^1.9.10",
     "@types/node": "^25.9.1",
