@@ -1,0 +1,42 @@
+architecture: standalone
+
+auth:
+  enabled: true
+
+replica:
+  replicaCount: 0
+
+master:
+  persistence:
+    enabled: true
+    size: 1Gi
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+
+metrics:
+  enabled: true
+
+  service:
+    ports:
+      metrics: 9121
+
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring-app
+
+  prometheusRule:
+    enabled: false
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi

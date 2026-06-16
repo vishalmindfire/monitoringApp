@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: monitoring-app
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: worker
+
+  template:
+    metadata:
+      labels:
+        app: worker
+
+    spec:
+      containers:
+        - name: worker
+
+          image: vishalmindfiresolutions/monitor-worker:1.0.0
+
+          imagePullPolicy: IfNotPresent
+
+          env:
+            - name: REDIS_HOST
+              value: my-redis-master
+
+            - name: REDIS_PORT
+              value: '6379'
+
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-redis
+                  key: redis-password
+
+            - name: WORKER_CONCURRENCY
+              value: '4'
+
+          ports:
+            - name: metrics
+              containerPort: 5000
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+
+            limits:
+              cpu: 200m
+              memory: 248Mi
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: metrics
+
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: metrics
+
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
