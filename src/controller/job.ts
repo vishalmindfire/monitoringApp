@@ -16,6 +16,7 @@ export const scheduleJob = async (req: Request, res: Response) => {
     }
   );
 
+  await RedisClient.getClient().incr('jobs:submitted');
   res.status(201).json({
     message: 'Job queued',
     jobId: job.id,

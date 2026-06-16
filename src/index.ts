@@ -20,6 +20,10 @@ app.use(morgan('combined'));
 
 app.use('/api', jobRoutes);
 
+app.get('/healthz', (_req, res) => {
+  res.status(200).send('OK');
+});
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   const message = err instanceof Error ? err.message : 'Internal server error';
