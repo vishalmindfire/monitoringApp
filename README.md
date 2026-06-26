@@ -188,16 +188,53 @@ docker build -f aggregator-dockerfile.yml -t vishalmindfiresolutions/monitor-agg
 - Prometheus Operator installed (for ServiceMonitor CRDs)
 - Ingress controller configured
 
+### Deploy Prometheus-grafna-stack
+
+```bash
+helm install prometheus prometheus-community/kube-prometheus-stack
+```
+
 ### Deploy Redis
 
 ```bash
 helm install my-redis bitnami/redis -f kubernetes/redis-config.yaml
 ```
 
-### Deploy All Services
+### Deploy Master Server
 
 ```bash
-kubectl apply -f kubernetes/
+kubectl apply -f kubernetes/server-deployment.yaml
+kubectl apply -f kubernetes/master-app-service.yaml
+```
+
+### Deploy Worker Server
+
+```bash
+kubectl apply -f kubernetes/worker-deployment.yaml
+kubectl apply -f kubernetes/metrics-service.yaml
+kubeclt apply -f kubernetes/service-monitor.yaml
+```
+
+### Deploy Aggregator Server
+
+```bash
+kubectl apply -f kubernetes/aggregator-deployment.yaml
+kubectl apply -f kubernetes/aggregator-service.yaml
+kubeclt apply -f kubernetes/aggregator-service-monitor.yaml
+```
+
+## Deply Ingress - NGINX, GRAFNA
+
+```bash
+helm install ingress-nginx ingress-nginx/ingress-nginx -f kubernetes/ingress-loadbalancer.yaml --namespace ingress-nginx --create-namespace
+kubectl apply -f kubernetes/ingress-resource.yaml
+kubectl apply -f kubernetes/ingress-grafna.yaml
+```
+
+## Deploy HPA
+
+```bash
+kubectl apply -f kubernetes/horizontal-pod-autoscaler.yaml
 ```
 
 This creates:
@@ -269,3 +306,11 @@ Under load (e.g., via `kubernetes/load-test.js`), the worker scales up automatic
 | `npm run lint:fix`       | Run ESLint with auto-fix       |
 | `npm run format`         | Format with Prettier           |
 | `npm test`               | Run Jest tests                 |
+
+## Load Testing
+
+```bash
+    k6 run kubernetes/load-test.js
+```
+
+![alt text](image.png)

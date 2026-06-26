@@ -6,7 +6,7 @@ export const options = {
 };
 
 export default function () {
-  http.post('http://172.27.6.191:31421/api/submit', null, {
+  http.post('http://172.31.100.26:31421/api/submit', null, {
     headers: {
       Host: 'service.monitor.local',
     },
